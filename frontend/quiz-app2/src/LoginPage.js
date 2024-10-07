@@ -16,22 +16,25 @@ const LoginPage = ({ onLogin }) => {
       },
       body: JSON.stringify({ email, password }),
     });
+    // if (response.ok) {
+    const data = await response.json(); // Assuming your response contains user role info
+    console.log(data);
 
-    if (response.ok) {
-      const data = await response.json(); // Assuming your response contains user role info
-      const { role } = data;
+    const { role } = data.user;
 
-      onLogin(role);
+    console.log(role);
 
-      // Redirect based on role
-      if (role === "admin") {
-        navigate("/admin");
-      } else if (role === "quiztaker") {
-        navigate("/quiztaker");
-      }
-    } else {
-      alert("Login failed");
+    onLogin(role);
+
+    // Redirect based on role
+    if (role === "admin") {
+      navigate("/admin");
+    } else if (role === "quiztaker") {
+      navigate("/quiztaker");
     }
+    // } else {
+    //   alert("Login failed");
+    // }
   };
 
   return (

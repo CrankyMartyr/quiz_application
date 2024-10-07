@@ -1,0 +1,77 @@
+{
+  "users": {
+    "user1": {
+      "email": "admin@example.com",
+      "password": "admin123",
+      "role": "admin"
+    },
+    "user2": {
+      "email": "taker1@example.com",
+      "password": "taker123",
+      "role": "quiztaker"
+    },
+    "user3": {
+      "email": "taker2@example.com",
+      "password": "taker456",
+      "role": "quiztaker"
+    }
+  },
+  "quizzes": {
+    "quiz1": {
+      "title": "General Knowledge Quiz",
+      "questions": [
+        {
+          "questionText": "What is the capital of France?",
+          "choices": ["Paris", "London", "Berlin", "Rome"],
+          "correctAnswer": "Paris",
+          "marks": 5
+        },
+        {
+          "questionText": "Which planet is known as the Red Planet?",
+          "choices": ["Earth", "Mars", "Jupiter", "Venus"],
+          "correctAnswer": "Mars",
+          "marks": 5
+        }
+      ],
+      "createdAt": "2024-10-01T12:00:00Z"
+    },
+    "quiz2": {
+      "title": "Math Quiz",
+      "questions": [
+        {
+          "questionText": "What is 2 + 2?",
+          "choices": ["3", "4", "5", "6"],
+          "correctAnswer": "4",
+          "marks": 5
+        },
+        {
+          "questionText": "What is 10 / 2?",
+          "choices": ["2", "5", "10", "20"],
+          "correctAnswer": "5",
+          "marks": 5
+        }
+      ],
+      "createdAt": "2024-10-02T12:00:00Z"
+    }
+  },
+  "quizAttempts": {
+    "attempt1": {
+      "quizId": "quiz1",
+      "userId": "user2",
+      "answers": {
+        "0": "Paris",
+        "1": "Mars"
+      },
+      "attemptedAt": "2024-10-03T15:00:00Z"
+    },
+    "attempt2": {
+      "quizId": "quiz2",
+      "userId": "user3",
+      "answers": {
+        "0": "4",
+        "1": "5"
+      },
+      "attemptedAt": "2024-10-04T10:00:00Z"
+    }
+  }
+}

@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 
-const QuizTakerDashboard = ({ onLogout }) => {
+const QuizTakerDashboard = () => {
   const [quizzes, setQuizzes] = useState([]);
+  const [selectedQuiz, setSelectedQuiz] = useState(null);
+  const [answers, setAnswers] = useState({});
 
   useEffect(() => {
-    // Fetch the list of quizzes for the quiz taker
+    // Fetch the list of quizzes from the backend
     const fetchQuizzes = async () => {
-      const response = await fetch("http://localhost:5000/api/quizzes");
+      const response = await fetch("/api/quizzes");
       const data = await response.json();
       setQuizzes(data);
     };
@@ -14,19 +16,45 @@ const QuizTakerDashboard = ({ onLogout }) => {
     fetchQuizzes();
   }, []);
 
+  const handleAnswerChange = (qIndex, option) => {
+    setAnswers({ ...answers, [qIndex]: option });
+  };
+
   return (
     <div>
       <h1>Quiz Taker Dashboard</h1>
-      <button onClick={onLogout}>Logout</button>
-
-      <h2>Available Quizzes</h2>
+      <h2>Select a Quiz</h2>
       <ul>
         {quizzes.map((quiz) => (
           <li key={quiz.id}>
-            {quiz.title} <button>Take Quiz</button>
+            <button onClick={() => setSelectedQuiz(quiz)}>{quiz.title}</button>
           </li>
         ))}
       </ul>
+
+      {selectedQuiz && (
+        <div>
+          <h2>{selectedQuiz.title}</h2>
+          {selectedQuiz.questions.map((question, qIndex) => (
+            <div key={qIndex} style={{ marginBottom: "20px" }}>
+              <p>{question.question}</p>
+              {question.options.map((option, oIndex) => (
+                <div key={oIndex}>
+                  <label>
+                    <input
+                      type="radio"
+                      name={`question-${qIndex}`}
+                      value={option}
+                      onChange={() => handleAnswerChange(qIndex, option)}
+                    />
+                    {option}
+                  </label>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
